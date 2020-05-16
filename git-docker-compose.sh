@@ -1,11 +1,17 @@
 #! /bin/bash
 
-echo "=====Install Git====="
+echo "##########################################################"
+echo "####################### Install Git ######################"
+echo "##########################################################"
+
 sudo apt-get update
 
 sudo apt-get install git
 
-echo "=====Install Docker====="
+echo "##########################################################"
+echo "###################### Install Docker ####################"
+echo "##########################################################"
+
 sudo apt-get update
 
 sudo apt-get -y install \
@@ -30,14 +36,23 @@ sudo apt-get -y install docker-ce docker-ce-cli containerd.io
 
 sudo usermod -aG docker ${USER}
 
-echo "=====Install Docker Compose====="
+echo "##########################################################"
+echo "################## Install Docker Compose ################"
+echo "##########################################################"
+
 sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
 sudo chmod +x /usr/local/bin/docker-compose
 
-echo "=====Sanity Checks====="
+echo "##########################################################"
+echo "###################### Sanity Checks #####################"
+echo "##########################################################"
+
 git --version
 docker --version
 docker-compose --version
 
+echo "##########################################################"
+echo "########### Type Your Password To Complete ###############"
+echo "##########################################################"
 su - ${USER}
