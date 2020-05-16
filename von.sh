@@ -1,21 +1,29 @@
 #! /bin/bash
 
-echo "Create new workspace folder"
+echo "##########################################################"
+echo "################## Create New Workspace ##################"
+echo "##########################################################"
 
 mkdir workspace
 
 cd ~/workspace
 
-echo "Clone VON code"
+echo "##########################################################"
+echo "##################### Clone VON Code #####################"
+echo "##########################################################"
 
 git clone https://github.com/bcgov/von-network.git
 
 cd ~/workspace/von-network
 
-echo "Build the code"
+echo "##########################################################"
+echo "####################### Build Code #######################"
+echo "##########################################################"
 
 ./manage build
 
-echo "Start the network"
+echo "##########################################################"
+echo "################### Start VON Network ####################"
+echo "##########################################################"
 
 ./manage start WEB_SERVER_HOST_PORT=80 "LEDGER_INSTANCE_NAME=My Ledger" &
