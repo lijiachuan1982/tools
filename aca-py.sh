@@ -6,36 +6,41 @@ if [ -z $1 ]
 then
   echo "Please specify the VON network IP address"
 else
+  if [ -z $2 ]
+    echo "Please specify this agent IP address"
+  then
+    echo "Please specify the VON network IP address"
+  else
+    echo "##########################################################"
+    echo "#################### Create Workspace ####################"
+    echo "##########################################################"
 
-  echo "##########################################################"
-  echo "#################### Create Workspace ####################"
-  echo "##########################################################"
+    mkdir workspace
 
-  mkdir workspace
+    cd ~/workspace
 
-  cd ~/workspace
+    echo "##########################################################"
+    echo "#################### Clone ACA-Py Code ###################"
+    echo "##########################################################"
 
-  echo "##########################################################"
-  echo "#################### Clone ACA-Py Code ###################"
-  echo "##########################################################"
+    git clone https://github.com/hyperledger/aries-cloudagent-python
 
-  git clone https://github.com/hyperledger/aries-cloudagent-python
+    cd ~/workspace/aries-cloudagent-python
 
-  cd ~/workspace/aries-cloudagent-python
+    echo "##########################################################"
+    echo "####################### Start Agent ######################"
+    echo "##########################################################"
 
-  echo "##########################################################"
-  echo "####################### Start Agent ######################"
-  echo "##########################################################"
-
-  PORTS="8080:8080 8000:8000" \
-  scripts/run_docker start --wallet-type indy \
-  --seed 000000000000000000000000000Agent \
-  --wallet-key welldone \
-  --wallet-name myWallet \
-  --genesis-url http://$1/genesis \
-  --inbound-transport http 0.0.0.0 8000 \
-  --outbound-transport http \
-  --admin 0.0.0.0 8080 \
-  --admin-insecure-mode
+   PORTS="8080:8080 8000:8000" \
+    scripts/run_docker start --wallet-type indy \
+    --seed 000000000000000000000000000Agent \
+    --wallet-key welldone \
+    --wallet-name myWallet \
+    --genesis-url http://$1/genesis \
+    -e http://$2:8000 \
+    --inbound-transport http 0.0.0.0 8000 \
+    --outbound-transport http \
+    --admin 0.0.0.0 8080 \
+    --admin-insecure-mode
+  fi
 fi
-
